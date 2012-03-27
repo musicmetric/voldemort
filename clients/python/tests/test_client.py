@@ -30,6 +30,12 @@ class VoldemortClientTest(unittest.TestCase):
             s.delete(k)
         return s
 
+    def _reinit_identity_client(self):
+        s = StoreClient('identity_test', [('localhost', 6666)])
+        for k in ['a', 'b', 'c']:
+            s.delete(k)
+        return s
+
     def test_raw_get(self):
         """
         Tests basic puts/gets in raw (non-serialized) mode.
@@ -483,6 +489,13 @@ class VoldemortServerClientTest(unittest.TestCase):
         self.assertEquals(len(resp), 1)
         self.assertEquals(len(resp[0]), 2)
         self.assertEquals(resp[0][0], self.val2)
+
+        s.put('identity_test', 'a', buffer("test\x00test"))
+        resp = s.get('identity_test', 'a')
+        self.assertEquals(len(resp), 1)
+        self.assertEquals(len(resp[0]), 2)
+        self.assertEquals(len(resp[0][0]), 9)
+        self.assertEquals(resp[0][0], buffer("test\x00test"))
 
     def test_json_get_all(self):
         """
