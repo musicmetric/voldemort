@@ -53,7 +53,7 @@ if [ -z "$VOLD_OPTS" ]; then
 fi
 
 # add '-Dlog4j.debug ' to debug log4j issues.
-LOG4JPROPERTIES="-Dlog4j.configuration=file:///${base_dir}/src/java/log4j.properties"
+LOG4JPROPERTIES="-Dlog4j.configuration=file:///${base_dir}/dist/resources/log4j.properties"
 
 export CLASSPATH
 java $LOG4JPROPERTIES $VOLD_OPTS -cp $CLASSPATH $@
