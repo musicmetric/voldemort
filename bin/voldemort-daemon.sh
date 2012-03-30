@@ -1,7 +1,21 @@
-#!/bin/bash
+#!/bin/sh
+#
 ##
 ## Wrapper for jsvc
 ##
+### BEGIN INIT INFO
+# Provides:          voldemort
+# Required-Start:    $network $local_fs
+# Required-Stop:
+# Should-Start:      $named
+# Should-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <Enter a short description of the sortware>
+# Description:       <Enter a long description of the software>
+#                    <...>
+#                    <...>
+### END INIT INFO
 
 base_dir=$(cd $(dirname $0)/..; pwd)
 
@@ -44,23 +58,23 @@ running_pid()
 
 start()
 {
-	jsvc \
-	    -Dlog4j.configuration=file://$base_dir/dist/resources/log4j.properties \
-	    $VOLD_OPTS \
-	    -pidfile $V_PIDFILE \
-	    -home $JAVA_HOME \
-	    -cp $CLASSPATH \
-	    -user $V_USER \
-	    voldemort.server.VoldemortJsvcDaemon $VOLDEMORT_HOME
+    jsvc \
+	-Dlog4j.configuration=file://$base_dir/dist/resources/log4j.properties \
+	$VOLD_OPTS \
+	-pidfile $V_PIDFILE \
+	-home $JAVA_HOME \
+	-cp $CLASSPATH \
+	-user $V_USER \
+	voldemort.server.VoldemortJsvcDaemon $VOLDEMORT_HOME
 }
 
 stop()
 {
-	jsvc -home $JAVA_HOME \
-	    -cp $CLASSPATH \
-	    -user $V_USER \
-	    -pidfile $V_PIDFILE \
-	    -stop voldemort.server.VoldemortJsvcDaemon $VOLDEMORT_HOME
+    jsvc -home $JAVA_HOME \
+	-cp $CLASSPATH \
+	-user $V_USER \
+	-pidfile $V_PIDFILE \
+	-stop voldemort.server.VoldemortJsvcDaemon $VOLDEMORT_HOME
 }
 
 case $1 in
@@ -83,6 +97,7 @@ case $1 in
 	    stop
 	    start
 	fi
+	;;
 
     "stop")
 	running_pid $(cat $V_PIDFILE)
