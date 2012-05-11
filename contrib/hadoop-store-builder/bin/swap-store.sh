@@ -30,4 +30,4 @@ done
 
 CLASSPATH=$CLASSPATH:$base_dir/dist/resources
 
-java -Dlog4j.configuration=$base_dir/dist/resources/log4j.properties -server -Xmx128M -cp $CLASSPATH voldemort.store.readonly.swapper.StoreSwapper $@ 
+java -Dlog4j.configuration=file://$base_dir/dist/resources/log4j.properties -server -Xmx128M -cp $CLASSPATH voldemort.store.readonly.swapper.StoreSwapper $@ 
