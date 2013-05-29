@@ -179,6 +179,9 @@ public class HdfsFetcher implements FileFetcher {
 
             boolean isHftpBasedFetch = sourceFileUrl.length() > 4
                                        && sourceFileUrl.substring(0, 4).equals("hftp");
+            // Do we need to authenticate and doAs
+            boolean isKerberosEnabled = false;
+
             logger.info("URL : " + sourceFileUrl + " and hftp protocol enabled = "
                         + isHftpBasedFetch);
             logger.info("Hadoop path = " + hadoopConfigPath + " , keytab path = "
@@ -192,20 +195,24 @@ public class HdfsFetcher implements FileFetcher {
 
                 String security = config.get(CommonConfigurationKeys.HADOOP_SECURITY_AUTHENTICATION);
 
-                if(security == null || !security.equals("kerberos")) {
-                    logger.error("Security isn't turned on in the conf: "
+                isKerberosEnabled = security != null && security.equals("kerberos");
+                boolean isSimpleAuthentication = security == null || security.equals("simple");
+
+                if(isSimpleAuthentication) {
+                    logger.info("Security is set to simple, no need to authenticate ...");
+                } else if(isKerberosEnabled) {
+                    logger.info("Security is turned on in the conf. Trying to authenticate ...");
+                } else {
+                    logger.error("Unsupported security option in the conf: "
                                  + CommonConfigurationKeys.HADOOP_SECURITY_AUTHENTICATION
                                  + " = "
                                  + config.get(CommonConfigurationKeys.HADOOP_SECURITY_AUTHENTICATION));
                     logger.error("Please make sure that the Hadoop config directory path is valid.");
                     throw new VoldemortException("Error in getting Hadoop filesystem. Invalid Hadoop config directory path.");
-                } else {
-                    logger.info("Security is turned on in the conf. Trying to authenticate ...");
-
                 }
             }
 
-            if(HdfsFetcher.keytabPath.length() > 0 && !isHftpBasedFetch) {
+            if(isKerberosEnabled && !isHftpBasedFetch) {
 
                 /*
                  * We're seeing intermittent errors while trying to get the
@@ -216,7 +223,7 @@ public class HdfsFetcher implements FileFetcher {
                 for(int retryCount = 0; retryCount < NUM_RETRIES; retryCount++) {
                     boolean isValidFilesystem = false;
 
-                    if(!new File(HdfsFetcher.keytabPath).exists()) {
+                    if(HdfsFetcher.keytabPath.length() == 0 || !new File(HdfsFetcher.keytabPath).exists()) {
                         logger.error("Invalid keytab file path. Please provide a valid keytab path");
                         throw new VoldemortException("Error in getting Hadoop filesystem. Invalid keytab file path.");
                     }
