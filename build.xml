@@ -80,7 +80,7 @@
     </copy>
     <replace-dir dir="META-INF" />
   	<echo message="creating manifest"/>
-    <manifest file="META-INF/MANIFEST.MF">   
+    <manifest file="META-INF/MANIFEST.MF">
       <attribute name="Voldemort-Implementation-Version" value="${curr.release}" />
       <attribute name="Implementation-Title" value="Voldemort" />
       <attribute name="Implementation-Version" value="${curr.release}" />
@@ -125,15 +125,13 @@
   </target>
 
   <!--
-    Use protoc version 2.3.0 to recompile by hand:
-      https://code.google.com/p/protobuf/downloads/detail?name=protobuf-2.3.0.tar.gz&can=2&q=
-
-    Below, '<DASH/>' means '-'. This was done to nest double-dashes within xml comment.
-
+    Use protoc version 2.4.0a to recompile by hand:
+      https://protobuf.googlecode.com/files/protobuf-2.4.0a.tar.gz
+  -->
   <target name="protobuff" description="Generate source files from .proto files">
     <pathconvert property="proto.sources" pathsep=" ">
       <path id="proto-files">
-	<fileset dir="${protobuff.dir}" />
+        <fileset dir="${protobuff.dir}" />
       </path>
     </pathconvert>
 
@@ -141,13 +139,12 @@
     <property name="javaout.path" location="${java.dir}"/>
     <property name="pythonout.path" location="${python.proto.dir}"/>
     <exec executable="protoc" failonerror="true">
-      <arg value="<DASH/><DASH/>proto_path=${proto.path}"/>
-      <arg value=""<DASH/><DASH/>java_out=${javaout.path}"/>
-      <arg value=""<DASH/><DASH/>python_out=${pythonout.path}"/>
+      <arg value="--proto_path=${proto.path}"/>
+      <arg value="--java_out=${javaout.path}"/>
+      <arg value="--python_out=${pythonout.path}"/>
       <arg line="${proto.sources}"/>
     </exec>
   </target>
-  -->
 
   <target name="jar" depends="build" description="Build server jar file">
     <jar destfile="${dist.dir}/${name}-${curr.release}.jar"  manifest="META-INF/MANIFEST.MF">
@@ -158,7 +155,7 @@
       <fileset dir="${java.dir}">
         <include name="**/*.xsd" />
       </fileset>
-    	
+
     	<fileset dir=".">
     	 		<include name="META-INF/MANIFEST.MF" />
       </fileset>
@@ -408,7 +405,7 @@
       <report todir="${testhtml.dir}" format="frames" />
     </junitreport>
   </target>
- 
+
   <target name="junit-long" depends="build, buildtest, junit" description="Run long junit tests that uses larger data sets than normal junit tests.">
     <replace-dir dir="${longtestreport.dir}" />
     <replace-dir dir="${longtesthtml.dir}" />
