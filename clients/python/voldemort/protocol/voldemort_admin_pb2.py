@@ -7,10 +7,12 @@ from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 
+import voldemort_client_pb2
+
 DESCRIPTOR = descriptor.FileDescriptor(
   name='voldemort-admin.proto',
   package='voldemort',
-  serialized_pb='\n\x15voldemort-admin.proto\x12\tvoldemort\x1a\x16voldemort-client.proto\"!\n\x12GetMetadataRequest\x12\x0b\n\x03key\x18\x01 \x02(\x0c\"]\n\x13GetMetadataResponse\x12%\n\x07version\x18\x01 \x01(\x0b\x32\x14.voldemort.Versioned\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"M\n\x15UpdateMetadataRequest\x12\x0b\n\x03key\x18\x01 \x02(\x0c\x12\'\n\tversioned\x18\x02 \x02(\x0b\x32\x14.voldemort.Versioned\"9\n\x16UpdateMetadataResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"7\n\tFileEntry\x12\x11\n\tfile_name\x18\x01 \x02(\t\x12\x17\n\x0f\x66ile_size_bytes\x18\x02 \x02(\x03\"F\n\x0ePartitionEntry\x12\x0b\n\x03key\x18\x01 \x02(\x0c\x12\'\n\tversioned\x18\x02 \x02(\x0b\x32\x14.voldemort.Versioned\"\x8e\x01\n\x1dUpdatePartitionEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x32\n\x0fpartition_entry\x18\x02 \x02(\x0b\x32\x19.voldemort.PartitionEntry\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\"A\n\x1eUpdatePartitionEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"-\n\x0fVoldemortFilter\x12\x0c\n\x04name\x18\x01 \x02(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x02(\x0c\"\xaf\x01\n\x18UpdateSlopEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x12\'\n\x07version\x18\x03 \x02(\x0b\x32\x16.voldemort.VectorClock\x12,\n\x0crequest_type\x18\x04 \x02(\x0e\x32\x16.voldemort.RequestType\x12\r\n\x05value\x18\x05 \x01(\x0c\x12\x11\n\ttransform\x18\x06 \x01(\x0c\"<\n\x19UpdateSlopEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"d\n\x1a\x46\x65tchPartitionFilesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\"\xef\x01\n\x1c\x46\x65tchPartitionEntriesRequest\x12\x37\n\x14replica_to_partition\x18\x01 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12\r\n\x05store\x18\x02 \x02(\t\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x14\n\x0c\x66\x65tch_values\x18\x04 \x01(\x08\x12\x14\n\x0cskip_records\x18\x05 \x01(\x03\x12\x17\n\x0finitial_cluster\x18\x06 \x01(\t\x12\x16\n\x0e\x66\x65tch_orphaned\x18\x07 \x01(\x08\"\x81\x01\n\x1d\x46\x65tchPartitionEntriesResponse\x12\x32\n\x0fpartition_entry\x18\x01 \x01(\x0b\x32\x19.voldemort.PartitionEntry\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\x1f\n\x05\x65rror\x18\x03 \x01(\x0b\x32\x10.voldemort.Error\"\xac\x01\n\x1d\x44\x65letePartitionEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x17\n\x0finitial_cluster\x18\x04 \x01(\t\"P\n\x1e\x44\x65letePartitionEntriesResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x03\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"\xcf\x01\n\x1dInitiateFetchAndUpdateRequest\x12\x0f\n\x07node_id\x18\x01 \x02(\x05\x12\r\n\x05store\x18\x02 \x02(\t\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x37\n\x14replica_to_partition\x18\x04 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12\x17\n\x0finitial_cluster\x18\x05 \x01(\t\x12\x10\n\x08optimize\x18\x06 \x01(\x08\"1\n\x1b\x41syncOperationStatusRequest\x12\x12\n\nrequest_id\x18\x01 \x02(\x05\"/\n\x19\x41syncOperationStopRequest\x12\x12\n\nrequest_id\x18\x01 \x02(\x05\"=\n\x1a\x41syncOperationStopResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"2\n\x19\x41syncOperationListRequest\x12\x15\n\rshow_complete\x18\x02 \x02(\x08\"R\n\x1a\x41syncOperationListResponse\x12\x13\n\x0brequest_ids\x18\x01 \x03(\x05\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\":\n\x0ePartitionTuple\x12\x14\n\x0creplica_type\x18\x01 \x02(\x05\x12\x12\n\npartitions\x18\x02 \x03(\x05\"e\n\x16PerStorePartitionTuple\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\"\xf8\x01\n\x19RebalancePartitionInfoMap\x12\x12\n\nstealer_id\x18\x01 \x02(\x05\x12\x10\n\x08\x64onor_id\x18\x02 \x02(\x05\x12\x0f\n\x07\x61ttempt\x18\x03 \x02(\x05\x12\x43\n\x18replica_to_add_partition\x18\x04 \x03(\x0b\x32!.voldemort.PerStorePartitionTuple\x12\x46\n\x1breplica_to_delete_partition\x18\x05 \x03(\x0b\x32!.voldemort.PerStorePartitionTuple\x12\x17\n\x0finitial_cluster\x18\x06 \x02(\t\"f\n\x1cInitiateRebalanceNodeRequest\x12\x46\n\x18rebalance_partition_info\x18\x01 \x02(\x0b\x32$.voldemort.RebalancePartitionInfoMap\"m\n#InitiateRebalanceNodeOnDonorRequest\x12\x46\n\x18rebalance_partition_info\x18\x01 \x03(\x0b\x32$.voldemort.RebalancePartitionInfoMap\"\x8a\x01\n\x1c\x41syncOperationStatusResponse\x12\x12\n\nrequest_id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06status\x18\x03 \x01(\t\x12\x10\n\x08\x63omplete\x18\x04 \x01(\x08\x12\x1f\n\x05\x65rror\x18\x05 \x01(\x0b\x32\x10.voldemort.Error\"\'\n\x16TruncateEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\":\n\x17TruncateEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"*\n\x0f\x41\x64\x64StoreRequest\x12\x17\n\x0fstoreDefinition\x18\x01 \x02(\t\"3\n\x10\x41\x64\x64StoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\'\n\x12\x44\x65leteStoreRequest\x12\x11\n\tstoreName\x18\x01 \x02(\t\"6\n\x13\x44\x65leteStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"P\n\x11\x46\x65tchStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\x12\x14\n\x0cpush_version\x18\x03 \x01(\x03\"9\n\x10SwapStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\"P\n\x11SwapStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\x12\x1a\n\x12previous_store_dir\x18\x02 \x01(\t\"@\n\x14RollbackStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x14\n\x0cpush_version\x18\x02 \x02(\x03\"8\n\x15RollbackStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"&\n\x10RepairJobRequest\x12\x12\n\nstore_name\x18\x01 \x01(\t\"4\n\x11RepairJobResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"=\n\x14ROStoreVersionDirMap\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\"/\n\x19GetROMaxVersionDirRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"y\n\x1aGetROMaxVersionDirResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"3\n\x1dGetROCurrentVersionDirRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"}\n\x1eGetROCurrentVersionDirResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"/\n\x19GetROStorageFormatRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"y\n\x1aGetROStorageFormatResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"@\n\x17\x46\x61iledFetchStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\";\n\x18\x46\x61iledFetchStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\xe6\x01\n\x1bRebalanceStateChangeRequest\x12K\n\x1drebalance_partition_info_list\x18\x01 \x03(\x0b\x32$.voldemort.RebalancePartitionInfoMap\x12\x16\n\x0e\x63luster_string\x18\x02 \x02(\t\x12\x0f\n\x07swap_ro\x18\x03 \x02(\x08\x12\x1f\n\x17\x63hange_cluster_metadata\x18\x04 \x02(\x08\x12\x1e\n\x16\x63hange_rebalance_state\x18\x05 \x02(\x08\x12\x10\n\x08rollback\x18\x06 \x02(\x08\"?\n\x1cRebalanceStateChangeResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"G\n DeleteStoreRebalanceStateRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x0f\n\x07node_id\x18\x02 \x02(\x05\"D\n!DeleteStoreRebalanceStateResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"h\n\x13NativeBackupRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x12\n\nbackup_dir\x18\x02 \x02(\t\x12\x14\n\x0cverify_files\x18\x03 \x02(\x08\x12\x13\n\x0bincremental\x18\x04 \x02(\x08\">\n\x14ReserveMemoryRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x12\n\nsize_in_mb\x18\x02 \x02(\x03\"8\n\x15ReserveMemoryResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\xf0\x0e\n\x15VoldemortAdminRequest\x12)\n\x04type\x18\x01 \x02(\x0e\x32\x1b.voldemort.AdminRequestType\x12\x33\n\x0cget_metadata\x18\x02 \x01(\x0b\x32\x1d.voldemort.GetMetadataRequest\x12\x39\n\x0fupdate_metadata\x18\x03 \x01(\x0b\x32 .voldemort.UpdateMetadataRequest\x12J\n\x18update_partition_entries\x18\x04 \x01(\x0b\x32(.voldemort.UpdatePartitionEntriesRequest\x12H\n\x17\x66\x65tch_partition_entries\x18\x05 \x01(\x0b\x32\'.voldemort.FetchPartitionEntriesRequest\x12J\n\x18\x64\x65lete_partition_entries\x18\x06 \x01(\x0b\x32(.voldemort.DeletePartitionEntriesRequest\x12K\n\x19initiate_fetch_and_update\x18\x07 \x01(\x0b\x32(.voldemort.InitiateFetchAndUpdateRequest\x12\x46\n\x16\x61sync_operation_status\x18\x08 \x01(\x0b\x32&.voldemort.AsyncOperationStatusRequest\x12H\n\x17initiate_rebalance_node\x18\t \x01(\x0b\x32\'.voldemort.InitiateRebalanceNodeRequest\x12\x42\n\x14\x61sync_operation_stop\x18\n \x01(\x0b\x32$.voldemort.AsyncOperationStopRequest\x12\x42\n\x14\x61sync_operation_list\x18\x0b \x01(\x0b\x32$.voldemort.AsyncOperationListRequest\x12;\n\x10truncate_entries\x18\x0c \x01(\x0b\x32!.voldemort.TruncateEntriesRequest\x12-\n\tadd_store\x18\r \x01(\x0b\x32\x1a.voldemort.AddStoreRequest\x12\x33\n\x0c\x64\x65lete_store\x18\x0e \x01(\x0b\x32\x1d.voldemort.DeleteStoreRequest\x12\x31\n\x0b\x66\x65tch_store\x18\x0f \x01(\x0b\x32\x1c.voldemort.FetchStoreRequest\x12/\n\nswap_store\x18\x10 \x01(\x0b\x32\x1b.voldemort.SwapStoreRequest\x12\x37\n\x0erollback_store\x18\x11 \x01(\x0b\x32\x1f.voldemort.RollbackStoreRequest\x12\x44\n\x16get_ro_max_version_dir\x18\x12 \x01(\x0b\x32$.voldemort.GetROMaxVersionDirRequest\x12L\n\x1aget_ro_current_version_dir\x18\x13 \x01(\x0b\x32(.voldemort.GetROCurrentVersionDirRequest\x12\x44\n\x15\x66\x65tch_partition_files\x18\x14 \x01(\x0b\x32%.voldemort.FetchPartitionFilesRequest\x12@\n\x13update_slop_entries\x18\x16 \x01(\x0b\x32#.voldemort.UpdateSlopEntriesRequest\x12>\n\x12\x66\x61iled_fetch_store\x18\x18 \x01(\x0b\x32\".voldemort.FailedFetchStoreRequest\x12\x43\n\x15get_ro_storage_format\x18\x19 \x01(\x0b\x32$.voldemort.GetROStorageFormatRequest\x12\x46\n\x16rebalance_state_change\x18\x1a \x01(\x0b\x32&.voldemort.RebalanceStateChangeRequest\x12/\n\nrepair_job\x18\x1b \x01(\x0b\x32\x1b.voldemort.RepairJobRequest\x12X\n initiate_rebalance_node_on_donor\x18\x1c \x01(\x0b\x32..voldemort.InitiateRebalanceNodeOnDonorRequest\x12Q\n\x1c\x64\x65lete_store_rebalance_state\x18\x1d \x01(\x0b\x32+.voldemort.DeleteStoreRebalanceStateRequest\x12\x35\n\rnative_backup\x18\x1e \x01(\x0b\x32\x1e.voldemort.NativeBackupRequest\x12\x37\n\x0ereserve_memory\x18\x1f \x01(\x0b\x32\x1f.voldemort.ReserveMemoryRequest*\xc8\x05\n\x10\x41\x64minRequestType\x12\x10\n\x0cGET_METADATA\x10\x00\x12\x13\n\x0fUPDATE_METADATA\x10\x01\x12\x1c\n\x18UPDATE_PARTITION_ENTRIES\x10\x02\x12\x1b\n\x17\x46\x45TCH_PARTITION_ENTRIES\x10\x03\x12\x1c\n\x18\x44\x45LETE_PARTITION_ENTRIES\x10\x04\x12\x1d\n\x19INITIATE_FETCH_AND_UPDATE\x10\x05\x12\x1a\n\x16\x41SYNC_OPERATION_STATUS\x10\x06\x12\x1b\n\x17INITIATE_REBALANCE_NODE\x10\x07\x12\x18\n\x14\x41SYNC_OPERATION_STOP\x10\x08\x12\x18\n\x14\x41SYNC_OPERATION_LIST\x10\t\x12\x14\n\x10TRUNCATE_ENTRIES\x10\n\x12\r\n\tADD_STORE\x10\x0b\x12\x10\n\x0c\x44\x45LETE_STORE\x10\x0c\x12\x0f\n\x0b\x46\x45TCH_STORE\x10\r\x12\x0e\n\nSWAP_STORE\x10\x0e\x12\x12\n\x0eROLLBACK_STORE\x10\x0f\x12\x1a\n\x16GET_RO_MAX_VERSION_DIR\x10\x10\x12\x1e\n\x1aGET_RO_CURRENT_VERSION_DIR\x10\x11\x12\x19\n\x15\x46\x45TCH_PARTITION_FILES\x10\x12\x12\x17\n\x13UPDATE_SLOP_ENTRIES\x10\x14\x12\x16\n\x12\x46\x41ILED_FETCH_STORE\x10\x16\x12\x19\n\x15GET_RO_STORAGE_FORMAT\x10\x17\x12\x1a\n\x16REBALANCE_STATE_CHANGE\x10\x18\x12\x0e\n\nREPAIR_JOB\x10\x19\x12$\n INITIATE_REBALANCE_NODE_ON_DONOR\x10\x1a\x12 \n\x1c\x44\x45LETE_STORE_REBALANCE_STATE\x10\x1b\x12\x11\n\rNATIVE_BACKUP\x10\x1c\x12\x12\n\x0eRESERVE_MEMORY\x10\x1d\x42-\n\x1cvoldemort.client.protocol.pbB\x0bVAdminProtoH\x01')
+  serialized_pb='\n\x15voldemort-admin.proto\x12\tvoldemort\x1a\x16voldemort-client.proto\"!\n\x12GetMetadataRequest\x12\x0b\n\x03key\x18\x01 \x02(\x0c\"]\n\x13GetMetadataResponse\x12%\n\x07version\x18\x01 \x01(\x0b\x32\x14.voldemort.Versioned\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"H\n\x15UpdateMetadataRequest\x12/\n\rmetadataEntry\x18\x01 \x03(\x0b\x32\x18.voldemort.KeyedVersions\"9\n\x16UpdateMetadataResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"7\n\tFileEntry\x12\x11\n\tfile_name\x18\x01 \x02(\t\x12\x17\n\x0f\x66ile_size_bytes\x18\x02 \x02(\x03\"F\n\x0ePartitionEntry\x12\x0b\n\x03key\x18\x01 \x02(\x0c\x12\'\n\tversioned\x18\x02 \x02(\x0b\x32\x14.voldemort.Versioned\"\x8e\x01\n\x1dUpdatePartitionEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x32\n\x0fpartition_entry\x18\x02 \x02(\x0b\x32\x19.voldemort.PartitionEntry\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\"A\n\x1eUpdatePartitionEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"-\n\x0fVoldemortFilter\x12\x0c\n\x04name\x18\x01 \x02(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x02(\x0c\"\xaf\x01\n\x18UpdateSlopEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x12\'\n\x07version\x18\x03 \x02(\x0b\x32\x16.voldemort.VectorClock\x12,\n\x0crequest_type\x18\x04 \x02(\x0e\x32\x16.voldemort.RequestType\x12\r\n\x05value\x18\x05 \x01(\x0c\x12\x11\n\ttransform\x18\x06 \x01(\x0c\"<\n\x19UpdateSlopEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"d\n\x1a\x46\x65tchPartitionFilesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\"\xa4\x02\n\x1c\x46\x65tchPartitionEntriesRequest\x12\x37\n\x14replica_to_partition\x18\x01 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12\r\n\x05store\x18\x02 \x02(\t\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x14\n\x0c\x66\x65tch_values\x18\x04 \x01(\x08\x12*\n\"OBSOLETE__DO_NOT_USE__skip_records\x18\x05 \x01(\x03\x12\x17\n\x0finitial_cluster\x18\x06 \x01(\t\x12\x16\n\x0e\x66\x65tch_orphaned\x18\x07 \x01(\x08\x12\x1d\n\x15records_per_partition\x18\x08 \x01(\x03\"\x81\x01\n\x1d\x46\x65tchPartitionEntriesResponse\x12\x32\n\x0fpartition_entry\x18\x01 \x01(\x0b\x32\x19.voldemort.PartitionEntry\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\x1f\n\x05\x65rror\x18\x03 \x01(\x0b\x32\x10.voldemort.Error\"\xac\x01\n\x1d\x44\x65letePartitionEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x17\n\x0finitial_cluster\x18\x04 \x01(\t\"P\n\x1e\x44\x65letePartitionEntriesResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x03\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"\xcf\x01\n\x1dInitiateFetchAndUpdateRequest\x12\x0f\n\x07node_id\x18\x01 \x02(\x05\x12\r\n\x05store\x18\x02 \x02(\t\x12*\n\x06\x66ilter\x18\x03 \x01(\x0b\x32\x1a.voldemort.VoldemortFilter\x12\x37\n\x14replica_to_partition\x18\x04 \x03(\x0b\x32\x19.voldemort.PartitionTuple\x12\x17\n\x0finitial_cluster\x18\x05 \x01(\t\x12\x10\n\x08optimize\x18\x06 \x01(\x08\"1\n\x1b\x41syncOperationStatusRequest\x12\x12\n\nrequest_id\x18\x01 \x02(\x05\"/\n\x19\x41syncOperationStopRequest\x12\x12\n\nrequest_id\x18\x01 \x02(\x05\"=\n\x1a\x41syncOperationStopResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"2\n\x19\x41syncOperationListRequest\x12\x15\n\rshow_complete\x18\x02 \x02(\x08\"R\n\x1a\x41syncOperationListResponse\x12\x13\n\x0brequest_ids\x18\x01 \x03(\x05\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\":\n\x0ePartitionTuple\x12\x14\n\x0creplica_type\x18\x01 \x02(\x05\x12\x12\n\npartitions\x18\x02 \x03(\x05\"e\n\x16PerStorePartitionTuple\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x37\n\x14replica_to_partition\x18\x02 \x03(\x0b\x32\x19.voldemort.PartitionTuple\"\xf8\x01\n\x19RebalancePartitionInfoMap\x12\x12\n\nstealer_id\x18\x01 \x02(\x05\x12\x10\n\x08\x64onor_id\x18\x02 \x02(\x05\x12\x0f\n\x07\x61ttempt\x18\x03 \x02(\x05\x12\x43\n\x18replica_to_add_partition\x18\x04 \x03(\x0b\x32!.voldemort.PerStorePartitionTuple\x12\x46\n\x1breplica_to_delete_partition\x18\x05 \x03(\x0b\x32!.voldemort.PerStorePartitionTuple\x12\x17\n\x0finitial_cluster\x18\x06 \x02(\t\"f\n\x1cInitiateRebalanceNodeRequest\x12\x46\n\x18rebalance_partition_info\x18\x01 \x02(\x0b\x32$.voldemort.RebalancePartitionInfoMap\"m\n#InitiateRebalanceNodeOnDonorRequest\x12\x46\n\x18rebalance_partition_info\x18\x01 \x03(\x0b\x32$.voldemort.RebalancePartitionInfoMap\"\x8a\x01\n\x1c\x41syncOperationStatusResponse\x12\x12\n\nrequest_id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06status\x18\x03 \x01(\t\x12\x10\n\x08\x63omplete\x18\x04 \x01(\x08\x12\x1f\n\x05\x65rror\x18\x05 \x01(\x0b\x32\x10.voldemort.Error\"\'\n\x16TruncateEntriesRequest\x12\r\n\x05store\x18\x01 \x02(\t\":\n\x17TruncateEntriesResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"*\n\x0f\x41\x64\x64StoreRequest\x12\x17\n\x0fstoreDefinition\x18\x01 \x02(\t\"3\n\x10\x41\x64\x64StoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\'\n\x12\x44\x65leteStoreRequest\x12\x11\n\tstoreName\x18\x01 \x02(\t\"6\n\x13\x44\x65leteStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"P\n\x11\x46\x65tchStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\x12\x14\n\x0cpush_version\x18\x03 \x01(\x03\"9\n\x10SwapStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\"P\n\x11SwapStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\x12\x1a\n\x12previous_store_dir\x18\x02 \x01(\t\"@\n\x14RollbackStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x14\n\x0cpush_version\x18\x02 \x02(\x03\"8\n\x15RollbackStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"&\n\x10RepairJobRequest\x12\x12\n\nstore_name\x18\x01 \x01(\t\"4\n\x11RepairJobResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"=\n\x14ROStoreVersionDirMap\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\"/\n\x19GetROMaxVersionDirRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"y\n\x1aGetROMaxVersionDirResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"3\n\x1dGetROCurrentVersionDirRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"}\n\x1eGetROCurrentVersionDirResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"/\n\x19GetROStorageFormatRequest\x12\x12\n\nstore_name\x18\x01 \x03(\t\"y\n\x1aGetROStorageFormatResponse\x12:\n\x11ro_store_versions\x18\x01 \x03(\x0b\x32\x1f.voldemort.ROStoreVersionDirMap\x12\x1f\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.voldemort.Error\"@\n\x17\x46\x61iledFetchStoreRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x11\n\tstore_dir\x18\x02 \x02(\t\";\n\x18\x46\x61iledFetchStoreResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\xfd\x01\n\x1bRebalanceStateChangeRequest\x12K\n\x1drebalance_partition_info_list\x18\x01 \x03(\x0b\x32$.voldemort.RebalancePartitionInfoMap\x12\x16\n\x0e\x63luster_string\x18\x02 \x02(\t\x12\x15\n\rstores_string\x18\x03 \x02(\t\x12\x0f\n\x07swap_ro\x18\x04 \x02(\x08\x12\x1f\n\x17\x63hange_cluster_metadata\x18\x05 \x02(\x08\x12\x1e\n\x16\x63hange_rebalance_state\x18\x06 \x02(\x08\x12\x10\n\x08rollback\x18\x07 \x02(\x08\"?\n\x1cRebalanceStateChangeResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"G\n DeleteStoreRebalanceStateRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x0f\n\x07node_id\x18\x02 \x02(\x05\"D\n!DeleteStoreRebalanceStateResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"h\n\x13NativeBackupRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x12\n\nbackup_dir\x18\x02 \x02(\t\x12\x14\n\x0cverify_files\x18\x03 \x02(\x08\x12\x13\n\x0bincremental\x18\x04 \x02(\x08\">\n\x14ReserveMemoryRequest\x12\x12\n\nstore_name\x18\x01 \x02(\t\x12\x12\n\nsize_in_mb\x18\x02 \x02(\x03\"8\n\x15ReserveMemoryResponse\x12\x1f\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x10.voldemort.Error\"\xf0\x0e\n\x15VoldemortAdminRequest\x12)\n\x04type\x18\x01 \x02(\x0e\x32\x1b.voldemort.AdminRequestType\x12\x33\n\x0cget_metadata\x18\x02 \x01(\x0b\x32\x1d.voldemort.GetMetadataRequest\x12\x39\n\x0fupdate_metadata\x18\x03 \x01(\x0b\x32 .voldemort.UpdateMetadataRequest\x12J\n\x18update_partition_entries\x18\x04 \x01(\x0b\x32(.voldemort.UpdatePartitionEntriesRequest\x12H\n\x17\x66\x65tch_partition_entries\x18\x05 \x01(\x0b\x32\'.voldemort.FetchPartitionEntriesRequest\x12J\n\x18\x64\x65lete_partition_entries\x18\x06 \x01(\x0b\x32(.voldemort.DeletePartitionEntriesRequest\x12K\n\x19initiate_fetch_and_update\x18\x07 \x01(\x0b\x32(.voldemort.InitiateFetchAndUpdateRequest\x12\x46\n\x16\x61sync_operation_status\x18\x08 \x01(\x0b\x32&.voldemort.AsyncOperationStatusRequest\x12H\n\x17initiate_rebalance_node\x18\t \x01(\x0b\x32\'.voldemort.InitiateRebalanceNodeRequest\x12\x42\n\x14\x61sync_operation_stop\x18\n \x01(\x0b\x32$.voldemort.AsyncOperationStopRequest\x12\x42\n\x14\x61sync_operation_list\x18\x0b \x01(\x0b\x32$.voldemort.AsyncOperationListRequest\x12;\n\x10truncate_entries\x18\x0c \x01(\x0b\x32!.voldemort.TruncateEntriesRequest\x12-\n\tadd_store\x18\r \x01(\x0b\x32\x1a.voldemort.AddStoreRequest\x12\x33\n\x0c\x64\x65lete_store\x18\x0e \x01(\x0b\x32\x1d.voldemort.DeleteStoreRequest\x12\x31\n\x0b\x66\x65tch_store\x18\x0f \x01(\x0b\x32\x1c.voldemort.FetchStoreRequest\x12/\n\nswap_store\x18\x10 \x01(\x0b\x32\x1b.voldemort.SwapStoreRequest\x12\x37\n\x0erollback_store\x18\x11 \x01(\x0b\x32\x1f.voldemort.RollbackStoreRequest\x12\x44\n\x16get_ro_max_version_dir\x18\x12 \x01(\x0b\x32$.voldemort.GetROMaxVersionDirRequest\x12L\n\x1aget_ro_current_version_dir\x18\x13 \x01(\x0b\x32(.voldemort.GetROCurrentVersionDirRequest\x12\x44\n\x15\x66\x65tch_partition_files\x18\x14 \x01(\x0b\x32%.voldemort.FetchPartitionFilesRequest\x12@\n\x13update_slop_entries\x18\x16 \x01(\x0b\x32#.voldemort.UpdateSlopEntriesRequest\x12>\n\x12\x66\x61iled_fetch_store\x18\x18 \x01(\x0b\x32\".voldemort.FailedFetchStoreRequest\x12\x43\n\x15get_ro_storage_format\x18\x19 \x01(\x0b\x32$.voldemort.GetROStorageFormatRequest\x12\x46\n\x16rebalance_state_change\x18\x1a \x01(\x0b\x32&.voldemort.RebalanceStateChangeRequest\x12/\n\nrepair_job\x18\x1b \x01(\x0b\x32\x1b.voldemort.RepairJobRequest\x12X\n initiate_rebalance_node_on_donor\x18\x1c \x01(\x0b\x32..voldemort.InitiateRebalanceNodeOnDonorRequest\x12Q\n\x1c\x64\x65lete_store_rebalance_state\x18\x1d \x01(\x0b\x32+.voldemort.DeleteStoreRebalanceStateRequest\x12\x35\n\rnative_backup\x18\x1e \x01(\x0b\x32\x1e.voldemort.NativeBackupRequest\x12\x37\n\x0ereserve_memory\x18\x1f \x01(\x0b\x32\x1f.voldemort.ReserveMemoryRequest*\xc8\x05\n\x10\x41\x64minRequestType\x12\x10\n\x0cGET_METADATA\x10\x00\x12\x13\n\x0fUPDATE_METADATA\x10\x01\x12\x1c\n\x18UPDATE_PARTITION_ENTRIES\x10\x02\x12\x1b\n\x17\x46\x45TCH_PARTITION_ENTRIES\x10\x03\x12\x1c\n\x18\x44\x45LETE_PARTITION_ENTRIES\x10\x04\x12\x1d\n\x19INITIATE_FETCH_AND_UPDATE\x10\x05\x12\x1a\n\x16\x41SYNC_OPERATION_STATUS\x10\x06\x12\x1b\n\x17INITIATE_REBALANCE_NODE\x10\x07\x12\x18\n\x14\x41SYNC_OPERATION_STOP\x10\x08\x12\x18\n\x14\x41SYNC_OPERATION_LIST\x10\t\x12\x14\n\x10TRUNCATE_ENTRIES\x10\n\x12\r\n\tADD_STORE\x10\x0b\x12\x10\n\x0c\x44\x45LETE_STORE\x10\x0c\x12\x0f\n\x0b\x46\x45TCH_STORE\x10\r\x12\x0e\n\nSWAP_STORE\x10\x0e\x12\x12\n\x0eROLLBACK_STORE\x10\x0f\x12\x1a\n\x16GET_RO_MAX_VERSION_DIR\x10\x10\x12\x1e\n\x1aGET_RO_CURRENT_VERSION_DIR\x10\x11\x12\x19\n\x15\x46\x45TCH_PARTITION_FILES\x10\x12\x12\x17\n\x13UPDATE_SLOP_ENTRIES\x10\x14\x12\x16\n\x12\x46\x41ILED_FETCH_STORE\x10\x16\x12\x19\n\x15GET_RO_STORAGE_FORMAT\x10\x17\x12\x1a\n\x16REBALANCE_STATE_CHANGE\x10\x18\x12\x0e\n\nREPAIR_JOB\x10\x19\x12$\n INITIATE_REBALANCE_NODE_ON_DONOR\x10\x1a\x12 \n\x1c\x44\x45LETE_STORE_REBALANCE_STATE\x10\x1b\x12\x11\n\rNATIVE_BACKUP\x10\x1c\x12\x12\n\x0eRESERVE_MEMORY\x10\x1d\x42-\n\x1cvoldemort.client.protocol.pbB\x0bVAdminProtoH\x01')
 
 _ADMINREQUESTTYPE = descriptor.EnumDescriptor(
   name='AdminRequestType',
@@ -133,8 +135,8 @@ _ADMINREQUESTTYPE = descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6995,
-  serialized_end=7707,
+  serialized_start=7066,
+  serialized_end=7778,
 )
 
 
@@ -240,16 +242,9 @@ _UPDATEMETADATAREQUEST = descriptor.Descriptor(
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
-      name='key', full_name='voldemort.UpdateMetadataRequest.key', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    descriptor.FieldDescriptor(
-      name='versioned', full_name='voldemort.UpdateMetadataRequest.versioned', index=1,
-      number=2, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
+      name='metadataEntry', full_name='voldemort.UpdateMetadataRequest.metadataEntry', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -263,7 +258,7 @@ _UPDATEMETADATAREQUEST = descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=190,
-  serialized_end=267,
+  serialized_end=262,
 )
 
 
@@ -290,8 +285,8 @@ _UPDATEMETADATARESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=269,
-  serialized_end=326,
+  serialized_start=264,
+  serialized_end=321,
 )
 
 
@@ -325,8 +320,8 @@ _FILEENTRY = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=328,
-  serialized_end=383,
+  serialized_start=323,
+  serialized_end=378,
 )
 
 
@@ -360,8 +355,8 @@ _PARTITIONENTRY = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=385,
-  serialized_end=455,
+  serialized_start=380,
+  serialized_end=450,
 )
 
 
@@ -402,8 +397,8 @@ _UPDATEPARTITIONENTRIESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=458,
-  serialized_end=600,
+  serialized_start=453,
+  serialized_end=595,
 )
 
 
@@ -430,8 +425,8 @@ _UPDATEPARTITIONENTRIESRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=602,
-  serialized_end=667,
+  serialized_start=597,
+  serialized_end=662,
 )
 
 
@@ -465,8 +460,8 @@ _VOLDEMORTFILTER = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=669,
-  serialized_end=714,
+  serialized_start=664,
+  serialized_end=709,
 )
 
 
@@ -528,8 +523,8 @@ _UPDATESLOPENTRIESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=717,
-  serialized_end=892,
+  serialized_start=712,
+  serialized_end=887,
 )
 
 
@@ -556,8 +551,8 @@ _UPDATESLOPENTRIESRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=894,
-  serialized_end=954,
+  serialized_start=889,
+  serialized_end=949,
 )
 
 
@@ -591,8 +586,8 @@ _FETCHPARTITIONFILESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=956,
-  serialized_end=1056,
+  serialized_start=951,
+  serialized_end=1051,
 )
 
 
@@ -632,7 +627,7 @@ _FETCHPARTITIONENTRIESREQUEST = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='skip_records', full_name='voldemort.FetchPartitionEntriesRequest.skip_records', index=4,
+      name='OBSOLETE__DO_NOT_USE__skip_records', full_name='voldemort.FetchPartitionEntriesRequest.OBSOLETE__DO_NOT_USE__skip_records', index=4,
       number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -652,6 +647,13 @@ _FETCHPARTITIONENTRIESREQUEST = descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    descriptor.FieldDescriptor(
+      name='records_per_partition', full_name='voldemort.FetchPartitionEntriesRequest.records_per_partition', index=7,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -661,8 +663,8 @@ _FETCHPARTITIONENTRIESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1059,
-  serialized_end=1298,
+  serialized_start=1054,
+  serialized_end=1346,
 )
 
 
@@ -703,8 +705,8 @@ _FETCHPARTITIONENTRIESRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1301,
-  serialized_end=1430,
+  serialized_start=1349,
+  serialized_end=1478,
 )
 
 
@@ -752,8 +754,8 @@ _DELETEPARTITIONENTRIESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1433,
-  serialized_end=1605,
+  serialized_start=1481,
+  serialized_end=1653,
 )
 
 
@@ -787,8 +789,8 @@ _DELETEPARTITIONENTRIESRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1607,
-  serialized_end=1687,
+  serialized_start=1655,
+  serialized_end=1735,
 )
 
 
@@ -850,8 +852,8 @@ _INITIATEFETCHANDUPDATEREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1690,
-  serialized_end=1897,
+  serialized_start=1738,
+  serialized_end=1945,
 )
 
 
@@ -878,8 +880,8 @@ _ASYNCOPERATIONSTATUSREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1899,
-  serialized_end=1948,
+  serialized_start=1947,
+  serialized_end=1996,
 )
 
 
@@ -906,8 +908,8 @@ _ASYNCOPERATIONSTOPREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1950,
-  serialized_end=1997,
+  serialized_start=1998,
+  serialized_end=2045,
 )
 
 
@@ -934,8 +936,8 @@ _ASYNCOPERATIONSTOPRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1999,
-  serialized_end=2060,
+  serialized_start=2047,
+  serialized_end=2108,
 )
 
 
@@ -962,8 +964,8 @@ _ASYNCOPERATIONLISTREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2062,
-  serialized_end=2112,
+  serialized_start=2110,
+  serialized_end=2160,
 )
 
 
@@ -997,8 +999,8 @@ _ASYNCOPERATIONLISTRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2114,
-  serialized_end=2196,
+  serialized_start=2162,
+  serialized_end=2244,
 )
 
 
@@ -1032,8 +1034,8 @@ _PARTITIONTUPLE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2198,
-  serialized_end=2256,
+  serialized_start=2246,
+  serialized_end=2304,
 )
 
 
@@ -1067,8 +1069,8 @@ _PERSTOREPARTITIONTUPLE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2258,
-  serialized_end=2359,
+  serialized_start=2306,
+  serialized_end=2407,
 )
 
 
@@ -1130,8 +1132,8 @@ _REBALANCEPARTITIONINFOMAP = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2362,
-  serialized_end=2610,
+  serialized_start=2410,
+  serialized_end=2658,
 )
 
 
@@ -1158,8 +1160,8 @@ _INITIATEREBALANCENODEREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2612,
-  serialized_end=2714,
+  serialized_start=2660,
+  serialized_end=2762,
 )
 
 
@@ -1186,8 +1188,8 @@ _INITIATEREBALANCENODEONDONORREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2716,
-  serialized_end=2825,
+  serialized_start=2764,
+  serialized_end=2873,
 )
 
 
@@ -1242,8 +1244,8 @@ _ASYNCOPERATIONSTATUSRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2828,
-  serialized_end=2966,
+  serialized_start=2876,
+  serialized_end=3014,
 )
 
 
@@ -1270,8 +1272,8 @@ _TRUNCATEENTRIESREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2968,
-  serialized_end=3007,
+  serialized_start=3016,
+  serialized_end=3055,
 )
 
 
@@ -1298,8 +1300,8 @@ _TRUNCATEENTRIESRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3009,
-  serialized_end=3067,
+  serialized_start=3057,
+  serialized_end=3115,
 )
 
 
@@ -1326,8 +1328,8 @@ _ADDSTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3069,
-  serialized_end=3111,
+  serialized_start=3117,
+  serialized_end=3159,
 )
 
 
@@ -1354,8 +1356,8 @@ _ADDSTORERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3113,
-  serialized_end=3164,
+  serialized_start=3161,
+  serialized_end=3212,
 )
 
 
@@ -1382,8 +1384,8 @@ _DELETESTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3166,
-  serialized_end=3205,
+  serialized_start=3214,
+  serialized_end=3253,
 )
 
 
@@ -1410,8 +1412,8 @@ _DELETESTORERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3207,
-  serialized_end=3261,
+  serialized_start=3255,
+  serialized_end=3309,
 )
 
 
@@ -1452,8 +1454,8 @@ _FETCHSTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3263,
-  serialized_end=3343,
+  serialized_start=3311,
+  serialized_end=3391,
 )
 
 
@@ -1487,8 +1489,8 @@ _SWAPSTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3345,
-  serialized_end=3402,
+  serialized_start=3393,
+  serialized_end=3450,
 )
 
 
@@ -1522,8 +1524,8 @@ _SWAPSTORERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3404,
-  serialized_end=3484,
+  serialized_start=3452,
+  serialized_end=3532,
 )
 
 
@@ -1557,8 +1559,8 @@ _ROLLBACKSTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3486,
-  serialized_end=3550,
+  serialized_start=3534,
+  serialized_end=3598,
 )
 
 
@@ -1585,8 +1587,8 @@ _ROLLBACKSTORERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3552,
-  serialized_end=3608,
+  serialized_start=3600,
+  serialized_end=3656,
 )
 
 
@@ -1613,8 +1615,8 @@ _REPAIRJOBREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3610,
-  serialized_end=3648,
+  serialized_start=3658,
+  serialized_end=3696,
 )
 
 
@@ -1641,8 +1643,8 @@ _REPAIRJOBRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3650,
-  serialized_end=3702,
+  serialized_start=3698,
+  serialized_end=3750,
 )
 
 
@@ -1676,8 +1678,8 @@ _ROSTOREVERSIONDIRMAP = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3704,
-  serialized_end=3765,
+  serialized_start=3752,
+  serialized_end=3813,
 )
 
 
@@ -1704,8 +1706,8 @@ _GETROMAXVERSIONDIRREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3767,
-  serialized_end=3814,
+  serialized_start=3815,
+  serialized_end=3862,
 )
 
 
@@ -1739,8 +1741,8 @@ _GETROMAXVERSIONDIRRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3816,
-  serialized_end=3937,
+  serialized_start=3864,
+  serialized_end=3985,
 )
 
 
@@ -1767,8 +1769,8 @@ _GETROCURRENTVERSIONDIRREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3939,
-  serialized_end=3990,
+  serialized_start=3987,
+  serialized_end=4038,
 )
 
 
@@ -1802,8 +1804,8 @@ _GETROCURRENTVERSIONDIRRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3992,
-  serialized_end=4117,
+  serialized_start=4040,
+  serialized_end=4165,
 )
 
 
@@ -1830,8 +1832,8 @@ _GETROSTORAGEFORMATREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4119,
-  serialized_end=4166,
+  serialized_start=4167,
+  serialized_end=4214,
 )
 
 
@@ -1865,8 +1867,8 @@ _GETROSTORAGEFORMATRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4168,
-  serialized_end=4289,
+  serialized_start=4216,
+  serialized_end=4337,
 )
 
 
@@ -1900,8 +1902,8 @@ _FAILEDFETCHSTOREREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4291,
-  serialized_end=4355,
+  serialized_start=4339,
+  serialized_end=4403,
 )
 
 
@@ -1928,8 +1930,8 @@ _FAILEDFETCHSTORERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4357,
-  serialized_end=4416,
+  serialized_start=4405,
+  serialized_end=4464,
 )
 
 
@@ -1955,29 +1957,36 @@ _REBALANCESTATECHANGEREQUEST = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='swap_ro', full_name='voldemort.RebalanceStateChangeRequest.swap_ro', index=2,
-      number=3, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
+      name='stores_string', full_name='voldemort.RebalanceStateChangeRequest.stores_string', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='change_cluster_metadata', full_name='voldemort.RebalanceStateChangeRequest.change_cluster_metadata', index=3,
+      name='swap_ro', full_name='voldemort.RebalanceStateChangeRequest.swap_ro', index=3,
       number=4, type=8, cpp_type=7, label=2,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='change_rebalance_state', full_name='voldemort.RebalanceStateChangeRequest.change_rebalance_state', index=4,
+      name='change_cluster_metadata', full_name='voldemort.RebalanceStateChangeRequest.change_cluster_metadata', index=4,
       number=5, type=8, cpp_type=7, label=2,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='rollback', full_name='voldemort.RebalanceStateChangeRequest.rollback', index=5,
+      name='change_rebalance_state', full_name='voldemort.RebalanceStateChangeRequest.change_rebalance_state', index=5,
       number=6, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='rollback', full_name='voldemort.RebalanceStateChangeRequest.rollback', index=6,
+      number=7, type=8, cpp_type=7, label=2,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1991,8 +2000,8 @@ _REBALANCESTATECHANGEREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4419,
-  serialized_end=4649,
+  serialized_start=4467,
+  serialized_end=4720,
 )
 
 
@@ -2019,8 +2028,8 @@ _REBALANCESTATECHANGERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4651,
-  serialized_end=4714,
+  serialized_start=4722,
+  serialized_end=4785,
 )
 
 
@@ -2054,8 +2063,8 @@ _DELETESTOREREBALANCESTATEREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4716,
-  serialized_end=4787,
+  serialized_start=4787,
+  serialized_end=4858,
 )
 
 
@@ -2082,8 +2091,8 @@ _DELETESTOREREBALANCESTATERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4789,
-  serialized_end=4857,
+  serialized_start=4860,
+  serialized_end=4928,
 )
 
 
@@ -2131,8 +2140,8 @@ _NATIVEBACKUPREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4859,
-  serialized_end=4963,
+  serialized_start=4930,
+  serialized_end=5034,
 )
 
 
@@ -2166,8 +2175,8 @@ _RESERVEMEMORYREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4965,
-  serialized_end=5027,
+  serialized_start=5036,
+  serialized_end=5098,
 )
 
 
@@ -2194,8 +2203,8 @@ _RESERVEMEMORYRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5029,
-  serialized_end=5085,
+  serialized_start=5100,
+  serialized_end=5156,
 )
 
 
@@ -2418,15 +2427,13 @@ _VOLDEMORTADMINREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5088,
-  serialized_end=6992,
+  serialized_start=5159,
+  serialized_end=7063,
 )
-
-import voldemort_client_pb2
 
 _GETMETADATARESPONSE.fields_by_name['version'].message_type = voldemort_client_pb2._VERSIONED
 _GETMETADATARESPONSE.fields_by_name['error'].message_type = voldemort_client_pb2._ERROR
-_UPDATEMETADATAREQUEST.fields_by_name['versioned'].message_type = voldemort_client_pb2._VERSIONED
+_UPDATEMETADATAREQUEST.fields_by_name['metadataEntry'].message_type = voldemort_client_pb2._KEYEDVERSIONS
 _UPDATEMETADATARESPONSE.fields_by_name['error'].message_type = voldemort_client_pb2._ERROR
 _PARTITIONENTRY.fields_by_name['versioned'].message_type = voldemort_client_pb2._VERSIONED
 _UPDATEPARTITIONENTRIESREQUEST.fields_by_name['partition_entry'].message_type = _PARTITIONENTRY
@@ -2499,6 +2506,64 @@ _VOLDEMORTADMINREQUEST.fields_by_name['initiate_rebalance_node_on_donor'].messag
 _VOLDEMORTADMINREQUEST.fields_by_name['delete_store_rebalance_state'].message_type = _DELETESTOREREBALANCESTATEREQUEST
 _VOLDEMORTADMINREQUEST.fields_by_name['native_backup'].message_type = _NATIVEBACKUPREQUEST
 _VOLDEMORTADMINREQUEST.fields_by_name['reserve_memory'].message_type = _RESERVEMEMORYREQUEST
+DESCRIPTOR.message_types_by_name['GetMetadataRequest'] = _GETMETADATAREQUEST
+DESCRIPTOR.message_types_by_name['GetMetadataResponse'] = _GETMETADATARESPONSE
+DESCRIPTOR.message_types_by_name['UpdateMetadataRequest'] = _UPDATEMETADATAREQUEST
+DESCRIPTOR.message_types_by_name['UpdateMetadataResponse'] = _UPDATEMETADATARESPONSE
+DESCRIPTOR.message_types_by_name['FileEntry'] = _FILEENTRY
+DESCRIPTOR.message_types_by_name['PartitionEntry'] = _PARTITIONENTRY
+DESCRIPTOR.message_types_by_name['UpdatePartitionEntriesRequest'] = _UPDATEPARTITIONENTRIESREQUEST
+DESCRIPTOR.message_types_by_name['UpdatePartitionEntriesResponse'] = _UPDATEPARTITIONENTRIESRESPONSE
+DESCRIPTOR.message_types_by_name['VoldemortFilter'] = _VOLDEMORTFILTER
+DESCRIPTOR.message_types_by_name['UpdateSlopEntriesRequest'] = _UPDATESLOPENTRIESREQUEST
+DESCRIPTOR.message_types_by_name['UpdateSlopEntriesResponse'] = _UPDATESLOPENTRIESRESPONSE
+DESCRIPTOR.message_types_by_name['FetchPartitionFilesRequest'] = _FETCHPARTITIONFILESREQUEST
+DESCRIPTOR.message_types_by_name['FetchPartitionEntriesRequest'] = _FETCHPARTITIONENTRIESREQUEST
+DESCRIPTOR.message_types_by_name['FetchPartitionEntriesResponse'] = _FETCHPARTITIONENTRIESRESPONSE
+DESCRIPTOR.message_types_by_name['DeletePartitionEntriesRequest'] = _DELETEPARTITIONENTRIESREQUEST
+DESCRIPTOR.message_types_by_name['DeletePartitionEntriesResponse'] = _DELETEPARTITIONENTRIESRESPONSE
+DESCRIPTOR.message_types_by_name['InitiateFetchAndUpdateRequest'] = _INITIATEFETCHANDUPDATEREQUEST
+DESCRIPTOR.message_types_by_name['AsyncOperationStatusRequest'] = _ASYNCOPERATIONSTATUSREQUEST
+DESCRIPTOR.message_types_by_name['AsyncOperationStopRequest'] = _ASYNCOPERATIONSTOPREQUEST
+DESCRIPTOR.message_types_by_name['AsyncOperationStopResponse'] = _ASYNCOPERATIONSTOPRESPONSE
+DESCRIPTOR.message_types_by_name['AsyncOperationListRequest'] = _ASYNCOPERATIONLISTREQUEST
+DESCRIPTOR.message_types_by_name['AsyncOperationListResponse'] = _ASYNCOPERATIONLISTRESPONSE
+DESCRIPTOR.message_types_by_name['PartitionTuple'] = _PARTITIONTUPLE
+DESCRIPTOR.message_types_by_name['PerStorePartitionTuple'] = _PERSTOREPARTITIONTUPLE
+DESCRIPTOR.message_types_by_name['RebalancePartitionInfoMap'] = _REBALANCEPARTITIONINFOMAP
+DESCRIPTOR.message_types_by_name['InitiateRebalanceNodeRequest'] = _INITIATEREBALANCENODEREQUEST
+DESCRIPTOR.message_types_by_name['InitiateRebalanceNodeOnDonorRequest'] = _INITIATEREBALANCENODEONDONORREQUEST
+DESCRIPTOR.message_types_by_name['AsyncOperationStatusResponse'] = _ASYNCOPERATIONSTATUSRESPONSE
+DESCRIPTOR.message_types_by_name['TruncateEntriesRequest'] = _TRUNCATEENTRIESREQUEST
+DESCRIPTOR.message_types_by_name['TruncateEntriesResponse'] = _TRUNCATEENTRIESRESPONSE
+DESCRIPTOR.message_types_by_name['AddStoreRequest'] = _ADDSTOREREQUEST
+DESCRIPTOR.message_types_by_name['AddStoreResponse'] = _ADDSTORERESPONSE
+DESCRIPTOR.message_types_by_name['DeleteStoreRequest'] = _DELETESTOREREQUEST
+DESCRIPTOR.message_types_by_name['DeleteStoreResponse'] = _DELETESTORERESPONSE
+DESCRIPTOR.message_types_by_name['FetchStoreRequest'] = _FETCHSTOREREQUEST
+DESCRIPTOR.message_types_by_name['SwapStoreRequest'] = _SWAPSTOREREQUEST
+DESCRIPTOR.message_types_by_name['SwapStoreResponse'] = _SWAPSTORERESPONSE
+DESCRIPTOR.message_types_by_name['RollbackStoreRequest'] = _ROLLBACKSTOREREQUEST
+DESCRIPTOR.message_types_by_name['RollbackStoreResponse'] = _ROLLBACKSTORERESPONSE
+DESCRIPTOR.message_types_by_name['RepairJobRequest'] = _REPAIRJOBREQUEST
+DESCRIPTOR.message_types_by_name['RepairJobResponse'] = _REPAIRJOBRESPONSE
+DESCRIPTOR.message_types_by_name['ROStoreVersionDirMap'] = _ROSTOREVERSIONDIRMAP
+DESCRIPTOR.message_types_by_name['GetROMaxVersionDirRequest'] = _GETROMAXVERSIONDIRREQUEST
+DESCRIPTOR.message_types_by_name['GetROMaxVersionDirResponse'] = _GETROMAXVERSIONDIRRESPONSE
+DESCRIPTOR.message_types_by_name['GetROCurrentVersionDirRequest'] = _GETROCURRENTVERSIONDIRREQUEST
+DESCRIPTOR.message_types_by_name['GetROCurrentVersionDirResponse'] = _GETROCURRENTVERSIONDIRRESPONSE
+DESCRIPTOR.message_types_by_name['GetROStorageFormatRequest'] = _GETROSTORAGEFORMATREQUEST
+DESCRIPTOR.message_types_by_name['GetROStorageFormatResponse'] = _GETROSTORAGEFORMATRESPONSE
+DESCRIPTOR.message_types_by_name['FailedFetchStoreRequest'] = _FAILEDFETCHSTOREREQUEST
+DESCRIPTOR.message_types_by_name['FailedFetchStoreResponse'] = _FAILEDFETCHSTORERESPONSE
+DESCRIPTOR.message_types_by_name['RebalanceStateChangeRequest'] = _REBALANCESTATECHANGEREQUEST
+DESCRIPTOR.message_types_by_name['RebalanceStateChangeResponse'] = _REBALANCESTATECHANGERESPONSE
+DESCRIPTOR.message_types_by_name['DeleteStoreRebalanceStateRequest'] = _DELETESTOREREBALANCESTATEREQUEST
+DESCRIPTOR.message_types_by_name['DeleteStoreRebalanceStateResponse'] = _DELETESTOREREBALANCESTATERESPONSE
+DESCRIPTOR.message_types_by_name['NativeBackupRequest'] = _NATIVEBACKUPREQUEST
+DESCRIPTOR.message_types_by_name['ReserveMemoryRequest'] = _RESERVEMEMORYREQUEST
+DESCRIPTOR.message_types_by_name['ReserveMemoryResponse'] = _RESERVEMEMORYRESPONSE
+DESCRIPTOR.message_types_by_name['VoldemortAdminRequest'] = _VOLDEMORTADMINREQUEST
 
 class GetMetadataRequest(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
