@@ -137,7 +137,7 @@ public class HadoopStoreJobRunner extends Configured implements Tool {
         }
 
         long chunkSizeBytes = Long.parseLong((String) options.valueOf("chunksize"));
-        Path inputPath = new Path((String) options.valueOf("input"));
+        String inputPaths = (String) options.valueOf("input");
         Path tempDir = new Path((String) options.valueOf("tmpdir"));
         Path outputDir = new Path((String) options.valueOf("output"));
         boolean saveKeys = options.has("save-keys");
@@ -193,10 +193,11 @@ public class HadoopStoreJobRunner extends Configured implements Tool {
                                                             chunkSizeBytes,
                                                             tempDir,
                                                             outputDir,
-                                                            inputPath,
+                                                            new Path(inputPaths),
                                                             checkSumType,
                                                             saveKeys,
                                                             reducerPerBucket);
+        builder.setInputPaths(inputPaths);
 
         builder.build();
         return 0;

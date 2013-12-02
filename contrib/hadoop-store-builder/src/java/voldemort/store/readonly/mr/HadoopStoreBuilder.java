@@ -45,6 +45,7 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.OutputFormat;
 import org.apache.hadoop.mapred.RunningJob;
 import org.apache.hadoop.mapred.SequenceFileOutputFormat;
+import org.apache.hadoop.util.StringUtils;
 import org.apache.log4j.Logger;
 
 import voldemort.VoldemortException;
@@ -81,7 +82,7 @@ public class HadoopStoreBuilder {
     private final Cluster cluster;
     private final StoreDefinition storeDef;
     private final long chunkSizeBytes;
-    private final Path inputPath;
+    private Path[] inputPaths;
     private final Path outputDir;
     private final Path tempDir;
     private CheckSumType checkSumType = CheckSumType.NONE;
@@ -158,7 +159,7 @@ public class HadoopStoreBuilder {
         this.config = conf;
         this.mapperClass = Utils.notNull(mapperClass);
         this.inputFormatClass = Utils.notNull(inputFormatClass);
-        this.inputPath = inputPath;
+        this.inputPaths = new Path[] { inputPath };
         this.cluster = Utils.notNull(cluster);
         this.storeDef = Utils.notNull(storeDef);
         this.chunkSizeBytes = chunkSizeBytes;
@@ -292,7 +293,7 @@ public class HadoopStoreBuilder {
         this.config = conf;
         this.mapperClass = Utils.notNull(mapperClass);
         this.inputFormatClass = Utils.notNull(inputFormatClass);
-        this.inputPath = inputPath;
+        this.inputPaths = new Path[] { inputPath };
         this.cluster = Utils.notNull(cluster);
         this.storeDef = Utils.notNull(storeDef);
         this.chunkSizeBytes = -1;
@@ -305,6 +306,18 @@ public class HadoopStoreBuilder {
         isAvro = false;
         if(numChunks <= 0)
             throw new VoldemortException("Number of chunks should be greater than zero");
+    }
+
+    /**
+     * Set inputPaths from which to read input data from a csv file string of
+     * the format that FileInputFormat parses. Clears any existing paths set.
+     */
+    public void setInputPaths(String csvPathString) {
+        String [] strings = StringUtils.split(csvPathString);
+        for (int i=0; i<strings.length; i++) {
+            strings[i] = StringUtils.unEscapeString(strings[i]);
+        }
+        inputPaths = StringUtils.stringToPath(strings);
     }
 
     /**
@@ -336,7 +349,7 @@ public class HadoopStoreBuilder {
             conf.setOutputValueClass(BytesWritable.class);
             conf.setJarByClass(getClass());
             conf.setReduceSpeculativeExecution(false);
-            FileInputFormat.setInputPaths(conf, inputPath);
+            FileInputFormat.setInputPaths(conf, inputPaths);
             conf.set("final.output.dir", outputDir.toString());
             conf.set("checksum.type", CheckSum.toString(checkSumType));
             FileOutputFormat.setOutputPath(conf, tempDir);
@@ -350,7 +363,10 @@ public class HadoopStoreBuilder {
             FileSystem tempFs = tempDir.getFileSystem(conf);
             tempFs.delete(tempDir, true);
 
-            long size = sizeOfPath(tempFs, inputPath);
+            long size = 0;
+            for(Path p: inputPaths) {
+                size += sizeOfPath(tempFs, p);
+            }
             logger.info("Data size = " + size + ", replication factor = "
                         + storeDef.getReplicationFactor() + ", numNodes = "
                         + cluster.getNumberOfNodes() + ", chunk size = " + chunkSizeBytes);
@@ -582,23 +598,24 @@ public class HadoopStoreBuilder {
 
     /**
      * Calculate the size of a path on DFS.
-     *
+     * 
      * @param fs the FileSystem object that corresponds to the Path
      * @param path the path to determine the size of
-     * @param glob if the path should be globbed, if called recursively this must be false
+     * @param glob if the path should be globbed, if called recursively this
+     *        must be false
      */
     private long sizeOfPath(FileSystem fs, Path path, boolean glob) throws IOException {
         long size = 0;
         // Use path globing if the glob flag is set to true.
-        FileStatus[] statuses = (glob)?fs.globStatus(path):fs.listStatus(path);
+        FileStatus[] statuses = (glob) ? fs.globStatus(path) : fs.listStatus(path);
 
         if(statuses != null) {
             for(FileStatus status: statuses) {
                 if(status.isDir()) {
-                    // don't use file path globbing when calling sizeOfPath recursively
+                    // don't use file path globbing when calling sizeOfPath
+                    // recursively
                     size += sizeOfPath(fs, status.getPath(), false);
-                }
-                else
+                } else
                     size += status.getLen();
             }
         }
@@ -611,4 +628,5 @@ public class HadoopStoreBuilder {
     private long sizeOfPath(FileSystem fs, Path path) throws IOException {
         return sizeOfPath(fs, path, true);
     }
+
 }
